@@ -1,6 +1,6 @@
 module Data2Segments(Clock, Data, Indicators, Segments);
   parameter Size = 4,
-            Signed = "Yes",
+            Signed = "No",
             ClockPeriod_ns = 20,
             RefreshTime_ns = 20_000; // Frefresh = 50kHz
   localparam ISize = (Signed == "No") ?

@@ -2,7 +2,7 @@
 `include "DataGenerator.sv"
 `include "Data2Segments.sv"
 
-module DGandD2SQuartus (Clock, Button_Up, Button_Reset, Button_Down, Button_Signed, Indicators, Segments);
+module DGandD2SQuartus (Clock, Button_Up, Button_Reset, Button_Down, Button_Signed, Indicators, Segments, SigneBit);
   parameter Size = 5,
             Signed = "Yes",
             ClockPeriod_ns = 20,
@@ -18,6 +18,9 @@ module DGandD2SQuartus (Clock, Button_Up, Button_Reset, Button_Down, Button_Sign
 
   logic [Size-1: 0] Data;
   
+  
+  output logic SigneBit;
+  
   DataGenerator
           #(.Size(Size),
             .Signed(Signed),
@@ -25,7 +28,7 @@ module DGandD2SQuartus (Clock, Button_Up, Button_Reset, Button_Down, Button_Sign
             . FilterPeriod_ns(FilterPeriod_ns),
             . PauseInterval_ns(PauseInterval_ns),
             . RepeatsInterval_ns(RepeatsInterval_ns))
-  B1 (.Clock(Clock), . Button_Up(Button_Up), .Button_Reset(Button_Reset), .Button_Down(Button_Down), .Data(Data));
+  B1 (.Clock(Clock), . Button_Up(Button_Up), .Button_Reset(Button_Reset), .Button_Down(Button_Down), .Data(Data), .Button_Signed(Button_Signed), .SigneBit(SigneBit));
   
   Data2Segments
           #(. Size(Size),

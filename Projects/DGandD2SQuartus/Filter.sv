@@ -1,6 +1,6 @@
 `include "SelectNPulse.sv"
 module Filter (Clock, I, O);
-  parameter Size = 3,
+  parameter Size = 4,
             ClockPeriod_ns = 20,
             FilterPeriod_ns = 500_000;
   input var bit Clock;
