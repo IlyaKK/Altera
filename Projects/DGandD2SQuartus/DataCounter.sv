@@ -1,7 +1,7 @@
-module DataCounter (Clock, Up, Reset, Down, Data, Signe, SigneBit);
+module DataCounter (Clock, Up, Reset, Down, Sign, Data, SigneBit);
   parameter Size = 5, Signed = "No";
   input var bit Clock;
-  input var logic Up, Reset, Down, Signe;
+  input var logic Up, Reset, Down, Sign;
   output var logic [Size-1: 0] Data = 0; // Binary
   output var logic SigneBit;
 
@@ -18,8 +18,8 @@ module DataCounter (Clock, Up, Reset, Down, Data, Signe, SigneBit);
     else // [-Max, ..., -1, 0, 1, ..., Max] Sign.Magnitude
       always_ff @(posedge Clock) begin: signed_counter
         if (~Reset) begin Data <= 0; end
-		  else if (Signe) begin
-           if (Data !=0) Data[Size-1] <= ~Data[Size-1]; end //Signe
+		  else if (Sign) begin
+           if (Data !=0) Data[Size-1] <= ~Data[Size-1]; end //Sign
         else if (Up) begin
            if ((Data >= 0) && (Data < 2**(Size-1) -1)) // [ 0.. +2]
              Data <= Data + 1;

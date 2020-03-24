@@ -50,9 +50,9 @@ set_global_assignment -name SYSTEMVERILOG_FILE DGandD2SQuartus.sv
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_location_assignment PIN_88 -to Button_Down
-set_location_assignment PIN_89 -to Button_Reset
-set_location_assignment PIN_90 -to Button_Up
+set_location_assignment PIN_90 -to Button_Down
+set_location_assignment PIN_88 -to Button_Reset
+set_location_assignment PIN_91 -to Button_Up
 set_location_assignment PIN_23 -to Clock
 set_location_assignment PIN_135 -to Indicators[1]
 set_location_assignment PIN_133 -to Indicators[0]
@@ -66,4 +66,5 @@ set_location_assignment PIN_121 -to Segments[1]
 set_location_assignment PIN_128 -to Segments[0]
 set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "2.5 V"
 set_location_assignment PIN_136 -to Indicators[2]
+set_location_assignment PIN_89 -to Button_Sign
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

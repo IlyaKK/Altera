@@ -1,10 +1,10 @@
-module PulseGenerator (Clock, iUp, iDown, iSigned, oUp, oDown, oSigned);
+module PulseGenerator (Clock, iUp, iDown, iSign, oUp, oDown, oSign);
   parameter ClockPeriod_ns = 20,
             PauseInterval_ns = 250_000_000, // 250 ms
             RepeatsInterval_ns = 150_000_000; // 150 ms
   input var bit Clock;
-  input var logic iUp, iDown, iSigned;
-  output var logic oUp = 1, oDown = 1, oSigned = 1;
+  input var logic iUp, iDown, iSign;
+  output var logic oUp = 1, oDown = 1, oSign = 1;
 
   localparam
     MaxPause = PauseInterval_ns / ClockPeriod_ns,
@@ -17,13 +17,13 @@ module PulseGenerator (Clock, iUp, iDown, iSigned, oUp, oDown, oSigned);
   var logic Pulse = 0;
   var logic Pressed;
   enum logic [1: 0] {Idle, Pause, Repeats} State = Idle;
-  assign Pressed = ~(iUp & iDown & iSigned);
+  assign Pressed = ~(iUp & iDown & iSign);
 
   
   always_comb begin: outputs
        oUp = Pulse & ~iUp;
        oDown = Pulse & ~iDown;
-		 oSigned = Pulse & ~iSigned;
+		 oSign = Pulse & ~iSign;
   end: outputs
   
   always_ff @(posedge Clock) begin: state_machine
@@ -36,7 +36,7 @@ module PulseGenerator (Clock, iUp, iDown, iSigned, oUp, oDown, oSigned);
           end
         Pause:
           if (Counter == MaxPause) begin
-			  if (iSigned) 
+			  if (iSign) 
 			  begin
 			   State <= Repeats;
             Pulse <= 1;

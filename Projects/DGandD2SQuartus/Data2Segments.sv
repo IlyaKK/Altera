@@ -1,3 +1,4 @@
+`include "General.sv"
 module Data2Segments(Clock, Data, Indicators, Segments);
   parameter Size = 4,
             Signed = "No",
